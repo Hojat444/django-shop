@@ -1,7 +1,7 @@
 from itertools import product
 from django.shortcuts import render,get_object_or_404
 from .models import Category,Product
-
+from cart.forms import CartAddProductForm
 
 # Create your views here.
 
@@ -29,10 +29,12 @@ def product_detail(request,id,slug):
     
     product = get_object_or_404(Product,id=id,slug=slug,available=True)
     category = product.category
+    cart_product_form = CartAddProductForm()
     
     context={
         'product':product,
         'category':category,
+        'form':cart_product_form,
     }
     
     return render(request,'shop/product/detail.html',context)        

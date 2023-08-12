@@ -32,7 +32,7 @@ class Product(models.Model):
     price = models.PositiveIntegerField(_("price"))
     available = models.BooleanField(_("available"),default=True)
     created = models.DateField(_("created"),auto_now_add=True)
-    updated = models.DateField(_("updated"),auto_now_add=True)
+    updated = models.DateField(_("updated"),auto_now=True)
     
     def get_absolute_url(self):
         return reverse('shop:product_detail', args=[self.id,self.slug])
