@@ -1,0 +1,12 @@
+{% extends 'shop/base.html' %}
+
+{% block content %}
+
+<div class="container mt-5">
+    <div class="alert alert-success text-center">
+        <h4 class="alert-heading">Thank you for your order!</h4>
+        <p>Your order has been successfully placed. Your shipping ID is <strong>{{ order.id }}</strong>.</p>
+    </div>
+</div>
+
+{% endblock content %}
