@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'cart.apps.CartConfig',
     'orders.apps.OrdersConfig',
     'rosetta',
+    'zarinpal',
 ]
 
 MIDDLEWARE = [
@@ -157,3 +158,7 @@ CART_SESSION_ID = 'cart'
 # EMAIL_USE_TLS = True
 # EMAIL_HOST_USER = 'h.ansari2001@gmail.com'
 # EMAIL_HOST_PASSWORD = 'ceuezvulxtzmrupw'
+
+# zarinpal
+MERCHANT = "00000000-0000-0000-0000-000000000000"
+SANDBOX = True

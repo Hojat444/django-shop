@@ -6,3 +6,4 @@
 3 - start: docker start rabbitmq
 4 - stop: docker stop rabbitmq
 5 - after runserver and run rabbitmq, we should run celery: celery -A myshop worker -l INFO --pool=solo
+6- monetoring with flower : celery -A myshop flower  
