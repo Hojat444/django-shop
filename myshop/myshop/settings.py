@@ -162,3 +162,7 @@ CART_SESSION_ID = 'cart'
 # zarinpal
 MERCHANT = "00000000-0000-0000-0000-000000000000"
 SANDBOX = True
+
+
+# statics
+STATIC_ROOT = os.path.join(BASE_DIR,'static/')

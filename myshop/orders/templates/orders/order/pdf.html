@@ -1,0 +1,58 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Invoice</title>
+    <link rel="stylesheet" type="text/css" href={% static 'css/pdf.css' %}>
+</head>
+<body>
+    <div class="invoice-container">
+        <div class="invoice-header">
+            <h1 class="name">Myshop</h1>
+        </div>
+
+        <div class="invoice-meta">
+            <p>Invoice no {{order.id}}</p>
+            <p><small>{{order.created|date:"M d Y"}}</small></p>
+        </div>
+
+        <div class="bill-to">
+            <h3>Bill to</h3>
+            <p>Recipient: {{order.first_name}} {{order.last_name}}</p>
+            <p>Email: {{order.email}}</p>
+            <p>Shipping Address: {{order.address}}</p>
+            <p>Postal Code: {{order.postal_code}}</p>
+        </div>
+
+        <h3>Items Bought</h3>
+        <table class="items-table">
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Cost</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in order.items.all  %}
+                    <tr>
+                        <td>{{item.product.name}}</td>
+                        <td>{{item.price}}</td>
+                        <td>{{item.quantity}}</td>
+                        <td>{{item.get_cost}}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <div class="status">
+            {% if order.paid %}
+                <span class="text-green">Paid</span>
+            {% else %}
+                <span class="text-yellow">Pending Payment</span>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>
