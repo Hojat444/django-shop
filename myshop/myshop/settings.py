@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'orders.apps.OrdersConfig',
     'rosetta',
     'zarinpal',
+    'coupons',
 ]
 
 MIDDLEWARE = [
@@ -136,7 +137,7 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR,"media/")
 
 # Sending Email in console
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 #Languages
 LANGUAGES = (
@@ -152,12 +153,12 @@ LOCALE_PATHS = (
 CART_SESSION_ID = 'cart'
 
 # Sending Email with GMAIL
-# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-# EMAIL_HOST = 'smtp.gmail.com'
-# EMAIL_PORT = 587  # For TLS
-# EMAIL_USE_TLS = True
-# EMAIL_HOST_USER = 'h.ansari2001@gmail.com'
-# EMAIL_HOST_PASSWORD = 'ceuezvulxtzmrupw'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587  # For TLS
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'h.ansari2001@gmail.com'
+EMAIL_HOST_PASSWORD = 'ceuezvulxtzmrupw'
 
 # zarinpal
 MERCHANT = "00000000-0000-0000-0000-000000000000"

@@ -8,7 +8,7 @@ import weasyprint
 from django.conf import settings
 from django.http import HttpResponse
 from django.template.loader import render_to_string
-from .tasks import order_created
+from .tasks import send_order_email
 # Create your views here.
 
 def order_create(request):
