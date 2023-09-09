@@ -3,10 +3,12 @@
 {% block content %}
 
 <div class="container mt-5">
-    <div class="alert alert-success text-center">
-        <h4 class="alert-heading">Thank you for your order!</h4>
-        <p>Your order has been successfully placed. Your shipping ID is <strong>{{ order.id }}</strong>.</p>
+    <div class="card shadow p-4">
+        <h4 class="text-center mb-4">Thank you for your order!</h4>
+        <p class="text-center">Your order has been successfully placed. Your shipping ID is <strong>{{ order.id }}</strong>.</p>
+        <div class="text-center">
+            <a href="{% url 'shop:product_list' %}" class="btn btn-primary mt-3">Continue Shopping</a>
+        </div>
     </div>
 </div>
-
 {% endblock content %}

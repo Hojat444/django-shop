@@ -1,49 +1,54 @@
 {% extends "shop/base.html" %}
 
-
 {% block title %}
-    {{product.name}}
+    {{ product.name }}
 {% endblock title %}
-    
 
 {% block content %}
     <div class="container-fluid">
-        <h1>{{product.name}}</h1>
-        <hr>
-        <div class="row">
-            <div class="col">
-                <img src="{{product.image.url}}" width="300" height="200" alt="">
+        <div class="row m-5">
+            <div class="col-md-6">
+                <img src="{{ product.image.url }}" class="img-fluid" alt="{{ product.name }}">
             </div>
-            <div class="col">
-                <div class="row">
-                    <b>Details : </b>
-                    <p>{{product.description}}</p>
-                </div>
-                <div class="row">
-                    <p><a href="{{product.get_absolute_url}}">{{product.category}}</a></p>
-                </div>
-                <div class="row">
-                    <p style="font-weight: bolder;font-size:larger;">{{product.price}} T</p>
-                </div>
-                <!-- <div class="row">
-                    <form class="form-inline">
-                        <div class="form-group mr-lg-1">
-                          <input type="number" class="form-control" id="productQuentity" min="1" aria-describedby="emailHelp" value="1">
-                        </div>
-                        <button type="submit" class="btn btn-primary">Add to Cart <i class="fas fa-shopping-cart"></i></button>
-                      </form>
-                </div> -->
-                <div class="row">
-                    <form action="{% url 'cart:cart_add' product.id %}" method="POST">
-                        {{form}}
-                        {% csrf_token %}
-                        <button type="submit" class="btn btn-primary text-light">Add to cart <i class="fa fa-shopping-cart"></i></button>
-                    </form>
-                </div>
+            <div class="col-md-6">
+                <h1>{{ product.name }}</h1>
+                <p class="text-muted">{{ product.category }}</p>
+                <p class="lead">{{ product.description }}</p>
+                <p class="display-4 text-primary">{{ product.price }} $</p>
+                <form action="{% url 'cart:cart_add' product.id %}" method="POST">
+                    {{ form }}
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-primary btn-lg">
+                        Add to Cart <i class="fa fa-shopping-cart"></i>
+                    </button>
+                </form>
             </div>
-            <div class="col"></div>
-            <div class="col"></div>
         </div>
+
+        {% if recommended_products %}
+        <hr>
+        <h2 class="mt-5">Recommended Products</h2>
+        <div class="row">
+            {% for product in recommended_products %}
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <a href="{{ product.get_absolute_url }}">
+                        <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}">
+                    </a>
+                    <div class="card-body">
+                        <h5 class="card-title">{{ product.name }}</h5>
+                        <p class="card-text">{{ product.description }}</p>
+                        <p class="card-text"><strong>{{ product.price }} $</strong></p>
+                        <form action="{% url 'cart:cart_add' product.id %}" method="POST">
+                            {{ form }}
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-primary">Add to Cart <i class="fa fa-shopping-cart"></i></button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
     </div>
 {% endblock content %}
-    

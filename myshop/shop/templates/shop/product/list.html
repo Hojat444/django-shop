@@ -1,13 +1,13 @@
 {% extends "shop/base.html" %}
 
 {% block title %}
-  product list
+  Product List
 {% endblock title %}
 
 {% block content %}
   <div class="container-fluid">
     <div class="row mt-4">
-      <div class="col-3">
+      <div class="col-md-3">
         <div id="list-example" class="list-group">
           <a class="list-group-item list-group-item-action {% if not category %}active{% endif %}" href="{% url 'shop:product_list' %}">All Products</a>
           {% for cat in categories %}
@@ -15,21 +15,32 @@
           {% endfor %}
         </div>
       </div>
-      <div class="col-9">
+      <div class="col-md-9">
         <div class="row">
           {% for product in products %}
-          <div class="col">
-            <a href="{{product.get_absolute_url}}" class="text-decoration-none text-secondary">
-              <div class="card my-2" style="width: 18rem;height:300px;">
-                <img class="card-img-top mb-2" src="{{product.image.url}}" width="200" height="200" alt="Card image cap">
-                <div class="card-body">
-                  <h5 class="card-title text-center">{{product.name}}</h5>
-                  <p class="card-text">{{product.price}}$</p>
-                </div>
+          <div class="col-md-4">
+            <div class="card my-3">
+              <a href="{{product.get_absolute_url}}" class="text-decoration-none text-secondary">
+                <img class="card-img-top" src="{{product.image.url}}" alt="{{product.name}}">
+              </a>
+              <div class="card-body">
+                <h5 class="card-title">
+                  <a href="{{product.get_absolute_url}}" class="text-decoration-none text-secondary">{{product.name}}</a>
+                </h5>
+                <p class="card-text">{{product.price}}$</p>
               </div>
-            </a>
+              <div class="card-footer">
+                <form action="{% url 'cart:cart_add' product.id %}" method="POST">
+                  {{ form }}
+                  {% csrf_token %}
+                  <button type="submit" class="btn btn-primary btn-block">
+                    Add to Cart <i class="fa fa-shopping-cart"></i>
+                  </button>
+                </form>
+              </div>
+            </div>
           </div>
-        {% endfor %}
+          {% endfor %}
         </div>
       </div>
     </div>

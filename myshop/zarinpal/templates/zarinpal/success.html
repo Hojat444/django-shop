@@ -2,10 +2,14 @@
 
 
 {% block content %}
-    <h1 class="text-success">Your Request is Successufuly!</h1>
-    <hr>
-    <p>
-        your id is : {{id}}
-    </p>
+<div class="container mt-5">
+    <div class="card shadow p-4 text-center">
+        <h1 class="text-success">Your Request is Successful!</h1>
+        <hr>
+        <p>Your order ID is: <strong>{{ id }}</strong></p>
+        <div class="text-center">
+            <a href="{% url 'shop:product_list' %}" class="btn btn-primary mt-3">Continue Shopping</a>
+        </div>
+    </div>
+</div>
 {% endblock content %}
-    

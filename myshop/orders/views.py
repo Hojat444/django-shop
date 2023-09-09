@@ -9,6 +9,7 @@ from django.conf import settings
 from django.http import HttpResponse
 from django.template.loader import render_to_string
 from .tasks import send_order_email
+from shop.recommender import Recommender
 # Create your views here.
 
 def order_create(request):
@@ -17,8 +18,19 @@ def order_create(request):
         form = OrderCreateform(request.POST)
         if form.is_valid():
             order = form.save()
+            
+            # This list contains all the products in the cart,
+            # which we store in Redis by calling the products_bought function.
+            product_list_for_redis=[]
+            
             for item in cart:
                 OrderItem.objects.create(order=order,product=item['product'],price=item['price'],quantity=item['quantity'])
+                product_list_for_redis.append(item['product'])
+            
+            r = Recommender()
+            # store in redis
+            r.products_bought(product_list_for_redis)
+              
             cart.clear()
             #order_created.delay(order.id)
             #return render(request,'orders/order/created.html',{'order':order})

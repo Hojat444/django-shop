@@ -2,10 +2,13 @@
 
 
 {% block content %}
-    <h1 class="text-info">Your Request is submited!</h1>
-    <hr>
-    <p>
-        status is {{status}}
-    </p>
+<div class="container mt-5">
+    <div class="card shadow p-4 text-center">
+        <h1 class="text-info">Your Request is submited!</h1>
+        <hr>
+        <div class="text-center">
+            <a href="{% url 'shop:product_list' %}" class="btn btn-primary mt-3">Continue Shopping</a>
+        </div>
+    </div>
+</div>
 {% endblock content %}
-    
