@@ -171,6 +171,6 @@ STATIC_ROOT = os.path.join(BASE_DIR,'static/')
 
 
 #redis config
-REDIS_HOST = '141.98.210.138'
+REDIS_HOST = 'localhost'
 REDIS_PORT = 6379
 REDIS_DB = 1
